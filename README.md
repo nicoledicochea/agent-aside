@@ -1,4 +1,4 @@
-# aside
+# Aside
 
 > In theater, an *aside* is when a character steps away from the action to
 > speak their internal thoughts directly to the audience — the rest of the
@@ -38,7 +38,7 @@ not just what was done.
 flowchart TD
     A["<b>Agent tries</b><br/>npm install date-fns"] --> B{"Flagged<br/>category?"}
     B -- no --> E["Proceeds normally"]
-    B -- yes --> C["<b>Hook asks</b><br/>'why this, not something else?'"]
+    B -- yes --> C["<b>Hook asks</b><br/>why this, not something else?"]
     C --> D["<b>Agent answers</b><br/>1–3 sentences"]
     D --> F[("<b>aside log</b>")]
     D --> E
