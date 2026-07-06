@@ -1,4 +1,4 @@
-# Aside
+# Agent Aside
 
 > In theater, an *aside* is when a character steps away from the action to
 > speak their internal thoughts directly to the audience — the rest of the
@@ -9,7 +9,8 @@
 > working. You never see the aside happen. It's just there in the log
 > afterward, for whoever needs it.
 
-<br>
+  
+
 
 ## The problem
 
@@ -22,7 +23,8 @@ That reasoning usually never makes it past the terminal scrollback.
 You're left staring at a finished diff, reconstructing "why" from scratch —
 even though your name is the one going on the PR.
 
-<br>
+  
+
 
 ## The idea
 
@@ -44,9 +46,12 @@ flowchart TD
     D --> E
 ```
 
+
+
 You never see that exchange happen. You just get the log.
 
-<br>
+  
+
 
 ## Not tied to one framework
 
@@ -58,7 +63,8 @@ The first implementation targets Claude Code because that's what's
 actually being built and tested right now. The concept applies to any
 agentic system with an equivalent interception point.
 
-<br>
+  
+
 
 ## Why this, and not [thing that already exists]
 
@@ -75,17 +81,21 @@ This doesn't grade whether the agent's output was correct — it gives a
 human enough to judge that for themselves.
 → [relationship to loop engineering](./docs/PRD-aside.md#relationship-to-loop-engineering)
 
-<br>
+  
+
 
 ## What's in this repo
 
-| File | What it is |
-|---|---|
-| [`PRD-aside.md`](./docs/PRD-aside.md) | Full spec: problem, goals, mechanism, prior art, cost tradeoffs, open questions |
-| [`aside-sketch.md`](./docs/aside-sketch.md) | The hook mechanism in detail, with a flow diagram |
-| [`THINKING.md`](./docs/THINKING.md) | How this idea evolved — including the framings that turned out to be wrong |
 
-<br>
+| File                                        | What it is                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------- |
+| `[PRD-aside.md](./docs/PRD-aside.md)`       | Full spec: problem, goals, mechanism, prior art, cost tradeoffs, open questions |
+| `[aside-sketch.md](./docs/aside-sketch.md)` | The hook mechanism in detail, with a flow diagram                               |
+| `[THINKING.md](./docs/THINKING.md)`         | How this idea evolved — including the framings that turned out to be wrong      |
+
+
+  
+
 
 ## Status
 
