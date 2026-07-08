@@ -85,6 +85,27 @@ power multiple downstream artifacts later — PR descriptions, orientation
 docs, review-priority flags — none of which need to be designed yet, because
 they're all just different consumers of the same captured log.
 
+## Framing 7: Correcting an overstated problem statement
+
+After sharing the project, a real-world check surfaced a gap between the
+project's framing and actual day-to-day experience: at work, on longer and
+higher-effort tasks, Claude Code visibly explains its reasoning fairly
+often — which didn't match a problem statement that implied explanation is
+generally missing.
+
+The resolution: the observed example (a simple directory-listing command
+producing zero visible reasoning, even at high effort) was true and useful,
+but it was being generalized into a broader claim ("agents don't explain
+themselves") that the evidence didn't actually support. 
+
+The more accurate and, as it turns out, more interesting claim was narrower: 
+explanation is *discretionary* — present when the model judges a step complex 
+enough to warrant it, absent when it doesn't — rather than *guaranteed* for any
+specific category of decision a reviewer cares about. That's a real gap
+even when overall explanation quality is good, because "good most of the
+time" isn't the same as "guaranteed for the moments I actually need it."
+This reframing is now reflected in the PRD's Problem section.
+
 ## What carried through every framing
 
 - The reasoning should be structured around reviewer judgment, not
@@ -93,3 +114,6 @@ they're all just different consumers of the same captured log.
   orientation and suspicion, not as a certified audit trail.
 - The fix should be as close to inherent/default behavior as possible, not
   something the user has to remember to configure per project.
+- Precision about the actual problem matters — overstating "agents don't
+  explain themselves" is weaker and less credible than the true, narrower
+  claim that explanation is inconsistent and undirected.
