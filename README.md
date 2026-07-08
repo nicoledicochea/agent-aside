@@ -9,28 +9,28 @@
 > working. You never see the aside happen. It's just there in the log
 > afterward, for whoever needs it.
 
-  
-
-
 ## The problem
 
 AI coding agents — Claude Code, Codex, or otherwise — make dozens of small
 judgment calls while they work: why this dependency, why this structure,
-why here and not somewhere else.
+why here and not somewhere else. But how much you get is up to the 
+model's own judgment about what counts as worth explaining.
 
-That reasoning usually never makes it past the terminal scrollback.
+Simple-looking steps often get none — a new dependency, a structural
+choice, a rename — even when that's exactly the kind of moment you'd want
+a reason for.
 
-You're left staring at a finished diff, reconstructing "why" from scratch —
-even though your name is the one going on the PR.
-
-  
-
+That inconsistency is the actual problem. Discretionary
+reasoning means the explanation is there when the model happens to think
+the moment warrants it, and gone when it doesn't — which isn't something
+you can rely on when your name is the one going on the PR.
 
 ## The idea
 
 Intercept specific categories of agent decisions *before they happen*.
-Force a short rationale out of the model as the price of proceeding.
-Quietly log it — the agent's aside.
+Force a short rationale out of the model as the price of proceeding —
+every time, not when it happens to feel warranted. Quietly log it — the
+agent's aside.
 
 Nothing is shown to you live. No extra prompts, no popups. The log just
 exists afterward, so you (or a summary tool) can see why things were done —
