@@ -2,24 +2,26 @@
 
 **Status:** Prototype idea
 **Author:** Nicole Dicochea
-**Last updated:** 2026-07-05
 
 ## Problem
 
 AI coding agents — regardless of framework — make plenty of small judgment
 calls while working — adding a dependency, introducing an abstraction,
-structuring code a certain way — and most of that reasoning is either never
-externalized as text, or exists briefly in a terminal/chat scrollback and
-is gone by the time a human needs it. The developer using the agent still
-has to review and ship the result, but has no reliable way to see *why*
-specific choices were made without stopping to ask, mid-task, which itself
-is friction.
+structuring code a certain way. 
+
+How much reasoning you get is left to the model's own judgment about what counts 
+as worth explaining. Simple-looking steps — a new dependency, a structural choice, 
+a rename — often get none, even though those are frequently exactly the moments a 
+reviewer would want a reason for. The developer still has to review and ship the 
+result, but has no reliable guarantee of *why* a specific choice was made, only a
+tendency that varies by task complexity and effort setting.
 
 Existing agent UIs solve for **status** ("edited 14 files, tests passed"),
-not **judgment** ("chose X over Y because Z"). Post-hoc summaries, generated
-cold at the end of a task, are weaker than they could be because the model
-has no memory of the intermediate reasoning by the time it's asked to
-reconstruct it.
+not **guaranteed judgment** ("chose X over Y because Z, every time this
+category of decision comes up"). Post-hoc summaries, generated cold at the
+end of a task, are weaker than they could be because the model has no
+memory of the intermediate reasoning by the time it's asked to reconstruct
+it.
 
 ## Observed example
 
@@ -30,14 +32,16 @@ head -100`) with no preceding explanatory text — just "Running a command"
 straight into the permission prompt. The prompt itself showed only the raw
 command string.
 
-This is a useful data point because it's a mundane case, not an edge case:
-a plain directory-exploration step, at the highest available effort
-setting, still produced zero visible reasoning before the tool call. It
-confirms the "skipped deliberation" failure mode described below isn't
-limited to complex or ambiguous decisions — it's the default for anything
-the model classifies as simple, effort setting notwithstanding. It's also
-exactly the kind of prompt that contributes to permission-prompt fatigue:
-low information, no throughline, repeated often.
+Update: this was less so evidence that Claude Code under-explains in general.
+On longer or more substantive tasks, especially at higher effort, visible
+reasoning shows up far more often. What this example actually demonstrates
+is narrower and more useful: even at the highest effort setting, a step
+the model classifies as "simple" can still produce zero visible reasoning
+— which means *whether* an explanation appears is still discretionary, not
+guaranteed, regardless of how good the model's reasoning generally is.
+
+That's the specific gap this project targets, not a claim that agents
+don't explain themselves.
 
 ## Goal
 
@@ -58,6 +62,11 @@ not just the one it's first built against.
   evasive is itself a signal worth having.
 - Not trying to capture reasoning for every tool call. Scope is limited to a
   narrow set of higher-stakes decision categories.
+- Not claiming agents generally under-explain themselves. The claim is
+  narrower: explanation is currently discretionary (the model decides when
+  it's warranted), and this project makes it guaranteed for a specific,
+  configurable set of decision categories, regardless of how "simple" the
+  model judges the step to be.
 - Not framework-exclusive. This PRD describes Claude Code as the reference
   implementation because that's what's actually being built and tested
   first, but the underlying mechanism — intercept before a flagged action,
@@ -275,6 +284,7 @@ prototyping both and comparing, rather than committing to one up front.
   judgment ("why this dependency," "what alternatives," "what's risky") in
   a reviewer-oriented format, not a chronological execution log.
 - Directly motivated by the gap between what Claude Code already generates
-  (reasoning text, sometimes) and what actually reaches the developer at
-  decision points (often nothing, due to adaptive thinking skipping
-  "simple" steps and permission prompts showing commands without context).
+  (reasoning text, sometimes, depending on the model's own read of task
+  complexity) and what's actually guaranteed to reach the developer at
+  decision points — which today is nothing, unless the model happens to
+  judge that particular step worth explaining.
